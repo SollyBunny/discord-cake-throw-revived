@@ -1,0 +1,67 @@
+export default {
+	maxCakesToday: 7,
+	color: 0x344a87,
+	assets: "https://raw.githubusercontent.com/SollyBunny/Discord-Cake-Throw-Revived/refs/heads/main/assets/",
+	outputs: [
+		{
+			value: +5,
+			weight: 0.05,
+			title: ":tada: Epic throw!",
+			messages: [
+				"%a threw the cake with might comparable to Steve Aoki's and hit %b so hard they fell down!",
+				"Power courses through %a's body and filled them with enough energy to hit %b with incredible strength!",
+				"Is that a bird? Is that a plane? No! It's the cake %a has thrown! It hit %b square in the face.",
+				"%a has thrown the cake with such marvelous strength that this margin is too narrow to contain! %b fell over from sheer power alone!",
+				"%a did a somersault with the cake and threw it right at %b's face!",
+				"%a gathered strength from their friends and threw a Super Cake which blew %b away!",
+				"%a has hit %b in the face with a SuperCake!",
+				"Oh? The cake that %a threw has evolved into a Super Cake midflight and hit %b!",
+			],
+		}, {
+			value: +1,
+			weight: 0.80,
+			title: ":muscle: Nice throw!",
+			messages: [
+				"%a threw the cake their mother made with love and hit %b! A great throw but at what cost?",
+				"%b made no efforts to dodge %a's throw.",
+				"Using simple trigonometry, %a calculated and threw a cake that successfully hit %b!",
+				"%a has skillfully thrown the cake and hit %b right in the face!",
+				"%a has thrown the cake with all their strength and managed to hit %b!",
+				"Gotcha! %a has successfully hit %b right in the face!",
+			],
+		}, {
+			value: 0,
+			weight: 0.10,
+			title: ":face_with_peeking_eye: So close!",
+			messages: [
+				"%a throws a Cake as far as they can, but they don't have Steve's arm strength and the cake misses %b.",
+				"%b managed to dodge %a's cake throw!",
+				"%a got distracted at the last possible second of the throw and ended up missing %b!",
+				"%a threw the cake as far as they can, but they don't have enough arm strength and the cake missed %b!",
+				"Due to a stroke of bad luck, the sun hit %a's eye right as they were about to throw the cake! It unfortunately missed %b",
+				"Strength isn't everything! The cake %a threw was not accurate enough and unfortunately went right by %b",
+				"Although %a has tried their best, the cake was thrown without sufficient strength and speed and fell right in front of %b!",
+				"The cake was super bouncy and hit both %b and %a in the face!",
+				"%a has thrown the cake with so much strength it hit a homerun! Though that means the cake didn't hit %b",
+			],
+		}, {
+			value: -1,
+			weight: 0.05,
+			title: ":face_with_open_eyes_and_hand_over_mouth: Oops!",
+			messages: [
+				"%a throws a Cake as far as they can, but it bounces back and hits %a's own face instead!",
+				"%a successfully threw the cake towards %b with the right strength and accuracy, though %b caught it mid-air and threw it right back at %a!",
+				"The cake was too heavy for %a and fell right on their foot!",
+				"The cake that %a has thrown went through a rift in space-time and came back right behind them and hit their back!",
+			],
+		},
+	],
+	magic8ball: [
+		"You should probably /cake",
+		"Hmmm, that's interesting. I recommend /cake",
+		"Good idea but /cake is better",
+		"/cake is the only answer",
+		"You will *literally* die if you don't /cake",
+		"Wait what's that over there? I think it's /cake",
+	],
+};
