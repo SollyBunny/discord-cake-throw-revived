@@ -30,15 +30,15 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 })();
 
 // Bot logic
-client.on("clientReady", async () => {
-	const servers = client.guilds.cache.size;
-	if (servers === 0) {
-		console.error("No servers!? You probably didn't invite me with the bot scope");
-		process.exit(1);
-	}
-	console.log(`Logged in as ${client.user.tag}, I am in ${servers} servers`);
-});
 
 client.on("interactionCreate", interact);
 
 client.login(process.env.TOKEN);
+await new Promise(resolve => client.once("clientReady", resolve));
+
+const servers = client.guilds.cache.size;
+if (servers === 0) {
+	console.error("No servers!? You probably didn't invite me with the bot scope");
+	process.exit(1);
+}
+console.log(`Logged in as ${client.user.tag}, I am in ${servers} servers`);
