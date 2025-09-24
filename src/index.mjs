@@ -20,7 +20,7 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 		if (process.env.GUILD_ID) { // For development
 			await rest.put(
 				Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
-				{ body: commands }
+				{ body: process.env.GUILD_COMMANDS_REMOVE ? [] : commands }
 			);
 		}
 		console.log("Updated slash commands");
