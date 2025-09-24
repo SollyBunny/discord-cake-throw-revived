@@ -13,14 +13,16 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 // Register commands
 (async () => {
 	try {
+		let remove = process.env.COMMANDS_REMOVE;
 		await rest.put(
 			Routes.applicationCommands(process.env.CLIENT_ID),
-			{ body: commands }
+			{ body: remove ? [] : commands }
 		);
 		if (process.env.GUILD_ID) { // For development
+			remove ||= process.env.GUILD_COMMANDS_REMOVE;
 			await rest.put(
 				Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
-				{ body: process.env.GUILD_COMMANDS_REMOVE ? [] : commands }
+				{ body: remove ? [] : commands }
 			);
 		}
 		console.log("Updated slash commands");
