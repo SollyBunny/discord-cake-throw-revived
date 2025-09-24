@@ -55,7 +55,7 @@ export const commands = [
 		.addUserOption(option =>
 			option.setName("target")
 				.setDescription("The person you want to throw a cake at")
-				.setRequired(true)
+				.setRequired(false)
 		)
 		.toJSON(),
 ];
@@ -283,7 +283,17 @@ export async function interact(interaction) {
 			return;
 		}
 		if (interactionName === "cake") {
-			await interactCake(interaction, interaction.options.getUser("target").id);
+			let targetID = interaction.options.getUser("target")?.id;
+			if (!targetID) {
+				targetID = interaction.guild.members.cache
+					.filter(i => !i.user.isBot && i.user.id !== interaction.user.id)
+					.randomKey()
+				if (!targetID) {
+					await interactError("Sorry I'm too dumb to figure out who you want to throw a cake at");
+					return;
+				}
+			}
+			await interactCake(interaction, targetID);
 		} else {
 			if (!interactionName.includes(":"))
 				return; // Old
