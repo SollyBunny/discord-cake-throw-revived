@@ -217,8 +217,9 @@ export async function interact(interaction) {
 		/**
 		 * @param {import("discord.js").ChatInputCommandInteraction | import("discord.js").ButtonInteraction} interaction
 		 * @param {Number} targetID
+		 * @param {Boolean} ping
 		 */
-		async function interactCake(interaction, targetID) {
+		async function interactCake(interaction, targetID, ping) {
 			const target = await interactionGetMemberOrUserOrCry(interaction, targetID);
 			if (!target) {
 				await interactError(interaction, "You have somehow managed to cake a ghost, good job.");
@@ -252,6 +253,8 @@ export async function interact(interaction) {
 					+ outcome.messages[Math.floor(Math.random() * outcome.messages.length)].replaceAll("%a", `**${throwerName}**`).replaceAll("%b", `**${targetName}**`)
 					+ `\n${outcome.value > 0 ? "+" : ""}${outcome.value} :cake: point${outcome.value === 1 ? "" : "s"}`,
 				extra: async out => {
+					if (ping)
+						out.content = `<@${targetID}>`;
 					out.embeds[0].setImage(await getRandomGif());
 					out.components = [new ActionRowBuilder().addComponents(
 						new ButtonBuilder()
@@ -293,7 +296,7 @@ export async function interact(interaction) {
 					return;
 				}
 			}
-			await interactCake(interaction, targetID);
+			await interactCake(interaction, targetID, true);
 		} else {
 			if (!interactionName.includes(":"))
 				return; // Old
