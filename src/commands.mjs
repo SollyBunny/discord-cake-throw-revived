@@ -287,7 +287,7 @@ export async function interact(interaction) {
 		} else {
 			if (!interactionName.includes(":"))
 				return; // Old
-			const [throwerID, targetID] = interactionName.slice("cake:".length);
+			const [throwerID, targetID] = interactionName.slice("cake:".length).split(",");
 			if (targetID === interaction.user.id) // Prevent self throw
 				await interactCake(interaction, throwerID);
 			else
