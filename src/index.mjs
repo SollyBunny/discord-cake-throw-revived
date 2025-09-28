@@ -9,6 +9,8 @@ dotenv.config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildPresences] });
 
+export default client;
+
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 // Register commands
