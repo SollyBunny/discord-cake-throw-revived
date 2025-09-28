@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 
-import * as DB from "./db.mjs";
+import * as Points from "./db/points.mjs";
 import CONFIG from "./config.mjs";
 
 function weightedRandomChoice(choices) {
@@ -150,7 +150,7 @@ export async function interact(interaction) {
 			});
 			return;
 		}
-		const data = DB.getTop(type, sort, 10, 1, interaction.guildId);
+		const data = Points.getTop(type, sort, 10, 1, interaction.guildId);
 		let message = "";
 		for (const [i, row] of Object.entries(data)) {
 			const name = type === "guilds" ? row.name : memberGetDisplayName(await interactionGetMemberOrUserOrCry(interaction, row.ID));
@@ -168,7 +168,7 @@ export async function interact(interaction) {
 			title += "Top users in this server";
 		await interactReply(interaction, { title, message });
 	} else if (interactionName === "deletedata") {
-		const user = DB.getSingle("users", interaction.user.id);
+		const user = Points.getSingle("users", interaction.user.id);
 		if (!user) {
 			await interactError(interaction, "You have no data to delete!");
 			return;
@@ -191,7 +191,7 @@ export async function interact(interaction) {
 			}
 		});
 	} else if (interactionName === "deletedataconfirm") {
-		await DB.deleteData(interaction.user.id);
+		await Points.deleteData(interaction.user.id);
 		await interaction.update({
 			embeds: [
 				new EmbedBuilder()
@@ -240,7 +240,7 @@ export async function interact(interaction) {
 			const throwerName = memberGetDisplayName(interaction.member);
 			const targetName = memberGetDisplayName(target);
 
-			const out = DB.addPoints(interaction.user.id, interaction.guildId, interaction.guild?.name, outcome.value, CONFIG.maxCakesToday);
+			const out = Points.addPoints(interaction.user.id, interaction.guildId, interaction.guild?.name, outcome.value, CONFIG.maxCakesToday);
 			if (!out.success) {
 				await interactError(interaction, `You have run out of cakes for today, cakes will refresh <t:${out.cakesTodayReset + 24 * 60 * 60}:R>`);
 				return;
