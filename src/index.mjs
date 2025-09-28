@@ -3,6 +3,7 @@
 import { Client, GatewayIntentBits, REST, Routes } from "discord.js";
 import dotenv from "dotenv";
 import { commands, interact } from "./commands.mjs";
+import { logInfo } from "./log.mjs";
 
 dotenv.config();
 
@@ -43,4 +44,4 @@ if (servers === 0) {
 	console.error("No servers!? You probably didn't invite me with the bot scope");
 	process.exit(1);
 }
-console.log(`Logged in as ${client.user.tag}, I am in ${servers} servers`);
+logInfo(`Logged in as ${client.user.tag}, I am in ${servers} servers`);
