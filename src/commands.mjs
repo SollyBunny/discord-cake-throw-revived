@@ -287,7 +287,9 @@ export async function interact(interaction) {
 		}
 		if (interactionName === "cake") {
 			let targetID = interaction.options.getUser("target")?.id;
-			if (!targetID) {
+			if (targetID) {
+				await interactCake(interaction, targetID, true);
+			} else {
 				targetID = interaction.guild.members.cache
 					.filter(i => !i.user.bot && i.user.id !== interaction.user.id)
 					.randomKey()
@@ -295,8 +297,8 @@ export async function interact(interaction) {
 					await interactError("Sorry I'm too dumb to figure out who you want to throw a cake at");
 					return;
 				}
+				await interactCake(interaction, targetID);
 			}
-			await interactCake(interaction, targetID, true);
 		} else {
 			if (!interactionName.includes(":"))
 				return; // Old
